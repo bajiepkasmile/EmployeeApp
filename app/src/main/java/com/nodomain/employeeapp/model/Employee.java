@@ -1,7 +1,10 @@
 package com.nodomain.employeeapp.model;
 
 
-public class Employee {
+import com.nodomain.employeeapp.utils.Copyable;
+
+
+public class Employee implements Copyable<Employee> {
 
     private String firstName;
     private String lastName;
@@ -22,6 +25,11 @@ public class Employee {
         this.avatarUrl = avatarUrl;
         this.specialityId = specialityId;
         this.speciality = speciality;
+    }
+
+    @Override
+    public Employee copy() {
+        return new Employee(firstName, lastName, birthdayTime, avatarUrl, specialityId, speciality);
     }
 
     public String getFirstName() {
