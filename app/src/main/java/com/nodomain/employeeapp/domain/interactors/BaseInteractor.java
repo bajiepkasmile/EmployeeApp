@@ -5,23 +5,25 @@ import android.os.Handler;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.concurrent.ExecutorService;
+
 
 public abstract class BaseInteractor<Args> {
 
+    private final ExecutorService executorService;
     private final Handler mainThreadHandler;
     private final EventBus eventBus;
 
-    protected BaseInteractor(Handler mainThreadHandler, EventBus eventBus) {
+    protected BaseInteractor(ExecutorService executorService, Handler mainThreadHandler, EventBus eventBus) {
+        this.executorService = executorService;
         this.mainThreadHandler = mainThreadHandler;
         this.eventBus = eventBus;
     }
 
-    abstract void execute(Args args);
+    abstract public void execute(Args args);
 
     protected void inBackground(Runnable runnable) {
-        //The application is very simple, so there is no need for any ExecutorService's.
-        //Just create a new thread for the task
-        new Thread(runnable).start();
+        executorService.execute(runnable);
     }
 
     protected void onMainThread(Runnable runnable) {

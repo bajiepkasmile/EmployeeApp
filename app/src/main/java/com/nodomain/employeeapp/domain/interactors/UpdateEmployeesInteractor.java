@@ -13,6 +13,7 @@ import com.nodomain.employeeapp.utils.NetworkUtil;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import static com.nodomain.employeeapp.data.DataSourceType.REMOTE;
 import static com.nodomain.employeeapp.domain.Error.CONNECTION_FAILED;
@@ -25,16 +26,17 @@ public class UpdateEmployeesInteractor extends BaseInteractor<Void> {
     private final NetworkUtil networkUtil;
 
     public UpdateEmployeesInteractor(
+            ExecutorService executorService,
             Handler mainThreadHandler,
             EventBus eventBus, EmployeesRepository repository,
             NetworkUtil networkUtil) {
-        super(mainThreadHandler, eventBus);
+        super(executorService, mainThreadHandler, eventBus);
         this.repository = repository;
         this.networkUtil = networkUtil;
     }
 
     @Override
-    void execute(Void aVoid) {
+    public void execute(Void aVoid) {
         boolean networkIsNotAvailable = !networkUtil.networkIsAvailable();
 
         if (networkIsNotAvailable) {

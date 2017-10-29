@@ -14,4 +14,8 @@ public interface EmployeeListMvpView extends MvpView {
     void showSpecialities(List<String> specialities);
 
     void showEmployeeDetailsView(Employee employee);
+
+    void showProgress();
+
+    void hideProgress();
 }
