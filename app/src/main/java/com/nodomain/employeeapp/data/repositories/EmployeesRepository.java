@@ -12,9 +12,15 @@ import java.util.List;
 
 public class EmployeesRepository {
 
-    private RemoteStorage remoteStorage;
-    private LocalStorage localStorage;
-    private Cache cache;
+    private final RemoteStorage remoteStorage;
+    private final LocalStorage localStorage;
+    private final Cache cache;
+
+    public EmployeesRepository(RemoteStorage remoteStorage, LocalStorage localStorage, Cache cache) {
+        this.remoteStorage = remoteStorage;
+        this.localStorage = localStorage;
+        this.cache = cache;
+    }
 
     public boolean hasCachedEmployees() {
         return cache.hasEmployees();

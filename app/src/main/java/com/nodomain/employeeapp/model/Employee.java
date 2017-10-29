@@ -6,12 +6,12 @@ import com.nodomain.employeeapp.utils.Copyable;
 
 public class Employee implements Copyable<Employee> {
 
-    private String firstName;
-    private String lastName;
-    private long birthdayTime;
-    private String avatarUrl;
-    private long specialityId;
-    private String speciality;
+    private final String firstName;
+    private final String lastName;
+    private final long birthdayTime;
+    private final String avatarUrl;
+    private final long specialityId;
+    private final String speciality;
 
     public Employee(String firstName,
                     String lastName,

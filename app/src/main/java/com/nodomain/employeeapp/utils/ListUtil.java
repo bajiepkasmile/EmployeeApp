@@ -14,6 +14,7 @@ public class ListUtil {
         List<E> copiedList = new ArrayList<>();
         for (E e : src)
             copiedList.add(e.copy());
+
         return copiedList;
     }
 }
