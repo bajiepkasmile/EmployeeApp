@@ -17,11 +17,11 @@ public class EmployeeDetailsMvpPresenterImpl
 
     @Override
     public void getEmployeeDetails(Employee employee) {
-
+        mvpView.showEmployeeDetails(employee);
     }
 
     @Override
     public void navigateToEmployeeList() {
-
+        mvpView.showEmployeeListView();
     }
 }
