@@ -5,10 +5,16 @@ import com.nodomain.employeeapp.model.Employee;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static com.nodomain.employeeapp.develop.DevelopUtil.TODO;
 
 
 public class LocalStorageImpl implements LocalStorage {
+
+    @Inject
+    public LocalStorageImpl() {
+    }
 
     @Override
     public List<Employee> getEmployees() {

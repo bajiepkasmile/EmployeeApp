@@ -15,6 +15,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import javax.inject.Inject;
+
 import static com.nodomain.employeeapp.data.DataSourceType.REMOTE;
 import static com.nodomain.employeeapp.domain.Error.CONNECTION_FAILED;
 import static com.nodomain.employeeapp.domain.Error.NETWORK_IS_NOT_AVAILABLE;
@@ -25,6 +27,7 @@ public class UpdateEmployeesInteractor extends BaseInteractor<Void> {
     private final EmployeesRepository repository;
     private final NetworkUtil networkUtil;
 
+    @Inject
     public UpdateEmployeesInteractor(
             ExecutorService executorService,
             Handler mainThreadHandler,

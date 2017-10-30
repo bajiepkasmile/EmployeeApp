@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import static com.nodomain.employeeapp.utils.ListUtil.copyListDeep;
 
 
@@ -20,6 +22,10 @@ public class LocalStorageImpl implements LocalStorage {
             new Employee("FNamE7", "LNAMe7", null, "", 102, "Разработчик")
     );
 
+    @Inject
+    public LocalStorageImpl() {
+    }
+
     @Override
     public List<Employee> getEmployees() {
         if (employees == null)
@@ -30,6 +36,6 @@ public class LocalStorageImpl implements LocalStorage {
 
     @Override
     public void setEmployees(List<Employee> employees) {
-        this.employees = copyListDeep(employees);  //return deep copy to achieve immutability of local storage
+        this.employees = copyListDeep(employees);  //save deep copy to achieve immutability of local storage
     }
 }

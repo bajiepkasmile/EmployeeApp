@@ -13,6 +13,8 @@ import com.nodomain.employeeapp.mvp.views.EmployeeListMvpView;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 
 public class EmployeeListMvpPresenterImpl
         extends BaseMvpPresenter<EmployeeListMvpView> implements EmployeeListMvpPresenter {
@@ -20,6 +22,7 @@ public class EmployeeListMvpPresenterImpl
     private final UpdateEmployeesInteractor updateEmployeesInteractor;
     private final GetEmployeesInteractor getEmployeesInteractor;
 
+    @Inject
     public EmployeeListMvpPresenterImpl(
             EventBus eventBus,
             UpdateEmployeesInteractor updateEmployeesInteractor,

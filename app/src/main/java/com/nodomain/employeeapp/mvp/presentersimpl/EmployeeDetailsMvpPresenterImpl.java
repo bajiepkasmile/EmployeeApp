@@ -7,10 +7,13 @@ import com.nodomain.employeeapp.mvp.views.EmployeeDetailsMvpView;
 
 import org.greenrobot.eventbus.EventBus;
 
+import javax.inject.Inject;
+
 
 public class EmployeeDetailsMvpPresenterImpl
         extends BaseMvpPresenter<EmployeeDetailsMvpView> implements EmployeeDetailsMvpPresenter {
 
+    @Inject
     public EmployeeDetailsMvpPresenterImpl(EventBus eventBus) {
         super(eventBus);
     }

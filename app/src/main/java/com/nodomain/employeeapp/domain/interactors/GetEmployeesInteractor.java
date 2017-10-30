@@ -13,6 +13,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import javax.inject.Inject;
+
 import static com.nodomain.employeeapp.data.DataSourceType.*;
 
 
@@ -20,6 +22,7 @@ public class GetEmployeesInteractor extends BaseInteractor<Void> {
 
     private final EmployeesRepository repository;
 
+    @Inject
     public GetEmployeesInteractor(
             ExecutorService executorService,
             Handler mainThreadHandler,

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.nodomain.employeeapp.model.Employee;
 import com.nodomain.employeeapp.mvp.presenters.EmployeeListMvpPresenter;
 import com.nodomain.employeeapp.mvp.views.EmployeeListMvpView;
 import com.nodomain.employeeapp.navigation.EmployeeListNavigator;
+import com.nodomain.employeeapp.ui.activities.MainActivity;
 import com.nodomain.employeeapp.ui.listeners.OnItemClickListener;
 import com.nodomain.employeeapp.ui.recyclerviews.adapters.EmployeesAdapter;
 
@@ -33,7 +35,7 @@ public class EmployeeListFragment
     @BindView(R.id.tv_list_is_empty)
     TextView tvListIsEmpty;
     @BindView(R.id.pb_load_employees)
-    TextView pbLoadEmployees;
+    ProgressBar pbLoadEmployees;
     @BindView(R.id.tv_load_employees)
     TextView tvLoadEmployees;
 
@@ -46,6 +48,7 @@ public class EmployeeListFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        MainActivity.getMainActivitySubComponent(getActivity()).inject(this);
         return inflater.inflate(R.layout.fragment_employee_list, container, false);
     }
 
@@ -54,6 +57,9 @@ public class EmployeeListFragment
         super.onViewCreated(view, savedInstanceState);
         String title = getString(R.string.loading);
         setTitle(title);
+
+        if (savedInstanceState == null)
+            mvpPresenter.getEmployees();
     }
 
     @Override

@@ -9,6 +9,8 @@ import com.nodomain.employeeapp.model.Employee;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class EmployeesRepository {
 
@@ -16,6 +18,7 @@ public class EmployeesRepository {
     private final LocalStorage localStorage;
     private final Cache cache;
 
+    @Inject
     public EmployeesRepository(RemoteStorage remoteStorage, LocalStorage localStorage, Cache cache) {
         this.remoteStorage = remoteStorage;
         this.localStorage = localStorage;

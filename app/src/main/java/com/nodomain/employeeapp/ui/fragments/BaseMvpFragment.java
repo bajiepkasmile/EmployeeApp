@@ -13,6 +13,8 @@ import com.nodomain.employeeapp.R;
 import com.nodomain.employeeapp.mvp.presenters.MvpPresenter;
 import com.nodomain.employeeapp.mvp.views.MvpView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,7 +25,9 @@ public abstract class BaseMvpFragment<P extends MvpPresenter, N> extends Fragmen
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @Inject
     protected N navigator;
+    @Inject
     protected P mvpPresenter;
 
     private Unbinder unbinder;

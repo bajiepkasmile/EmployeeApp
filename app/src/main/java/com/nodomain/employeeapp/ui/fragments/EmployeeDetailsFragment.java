@@ -16,6 +16,7 @@ import com.nodomain.employeeapp.model.Employee;
 import com.nodomain.employeeapp.mvp.presenters.EmployeeDetailsMvpPresenter;
 import com.nodomain.employeeapp.mvp.views.EmployeeDetailsMvpView;
 import com.nodomain.employeeapp.navigation.EmployeeDetailsNavigator;
+import com.nodomain.employeeapp.ui.activities.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -51,9 +52,8 @@ public class EmployeeDetailsFragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        MainActivity.getMainActivitySubComponent(getActivity()).inject(this);
         return inflater.inflate(R.layout.fragment_employee_details, container, false);
     }
 
