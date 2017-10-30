@@ -2,4 +2,17 @@
 	
 	<string name="app_name">EmployeeApp</string>
 	
+	<string name="loading">Загрузка…</string>
+	<string name="list_is_empty">Список пуст</string>
+	<string name="load_employees">Загрузка работников</string>
+	<string name="employee_full_name">%1$s %2$s</string>
+	<string name="birthday">Дата рождения:</string>
+	<string name="age">Возраст:</string>
+	<string name="speciality">Специальность:</string>
+	
+	<string name="error.network_is_not_available">Нет сети</string>
+	<string name="error.connection_failed">Ошибка соединения с сервером</string>
+	
+	<string name="content_description.avatar">Аватар</string>
+	
 </resources>

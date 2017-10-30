@@ -1,0 +1,96 @@
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	>
+	
+	<android.support.v7.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		style="@style/toolbar"
+		/>
+	
+	<ImageView
+		android:id="@+id/iv_avatar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:maxHeight="@dimen/max_avatar_height"
+		android:src="@drawable/ic_person"
+		android:scaleType="centerCrop"
+		android:adjustViewBounds="true"
+		android:background="@color/gray_light"
+		android:contentDescription="@string/content_description.avatar"
+		/>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="@dimen/spacing_big"
+		>
+		
+		<TextView
+			android:id="@+id/tv_birthday_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/birthday"
+			style="@style/employee_attribute_title"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_birthday"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_tiny"
+			android:layout_marginLeft="@dimen/spacing_small"
+			android:layout_marginRight="@dimen/spacing_small"
+			tools:text="20.07.2000"
+			style="@style/employee_attribute"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_age_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_big"
+			android:text="@string/age"
+			style="@style/employee_attribute_title"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_age"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_tiny"
+			android:layout_marginLeft="@dimen/spacing_small"
+			android:layout_marginRight="@dimen/spacing_small"
+			tools:text="17 лет"
+			style="@style/employee_attribute"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_speciality_title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_big"
+			android:text="@string/speciality"
+			style="@style/employee_attribute_title"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_speciality"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/spacing_tiny"
+			android:layout_marginLeft="@dimen/spacing_small"
+			android:layout_marginRight="@dimen/spacing_small"
+			tools:text="Разработчик"
+			style="@style/employee_attribute"
+			/>
+		
+	</LinearLayout>
+	
+</LinearLayout>

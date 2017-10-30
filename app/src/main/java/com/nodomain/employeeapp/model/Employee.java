@@ -6,12 +6,14 @@ import android.os.Parcelable;
 
 import com.nodomain.employeeapp.utils.Copyable;
 
+import java.util.Date;
+
 
 public class Employee implements Parcelable, Copyable<Employee> {
 
     private final String firstName;
     private final String lastName;
-    private final long birthdayTime;
+    private final Date birthdayDate;
     private final String avatarUrl;
     private final long specialityId;
     private final String speciality;
@@ -30,22 +32,23 @@ public class Employee implements Parcelable, Copyable<Employee> {
 
     public Employee(String firstName,
                     String lastName,
-                    long birthdayTime,
+                    Date birthdayDate,
                     String avatarUrl,
                     long specialityId,
                     String speciality) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthdayTime = birthdayTime;
+        this.birthdayDate = birthdayDate;
         this.avatarUrl = avatarUrl;
         this.specialityId = specialityId;
         this.speciality = speciality;
     }
 
+
     protected Employee(Parcel in) {
         firstName = in.readString();
         lastName = in.readString();
-        birthdayTime = in.readLong();
+        birthdayDate = new Date(in.readLong());
         avatarUrl = in.readString();
         specialityId = in.readLong();
         speciality = in.readString();
@@ -55,7 +58,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(firstName);
         dest.writeString(lastName);
-        dest.writeLong(birthdayTime);
+        dest.writeLong(birthdayDate.getTime());
         dest.writeString(avatarUrl);
         dest.writeLong(specialityId);
         dest.writeString(speciality);
@@ -68,7 +71,13 @@ public class Employee implements Parcelable, Copyable<Employee> {
 
     @Override
     public Employee copy() {
-        return new Employee(firstName, lastName, birthdayTime, avatarUrl, specialityId, speciality);
+        return new Employee(
+                firstName,
+                lastName,
+                new Date(birthdayDate.getTime()),
+                avatarUrl,
+                specialityId,
+                speciality);
     }
 
     public String getFirstName() {
@@ -79,8 +88,8 @@ public class Employee implements Parcelable, Copyable<Employee> {
         return lastName;
     }
 
-    public long getBirthdayTime() {
-        return birthdayTime;
+    public Date getBirthdayDate() {
+        return birthdayDate;
     }
 
     public String getAvatarUrl() {

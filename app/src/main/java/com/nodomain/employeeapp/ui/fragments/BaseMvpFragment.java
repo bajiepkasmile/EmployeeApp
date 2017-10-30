@@ -18,11 +18,12 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public abstract class BaseMvpFragment<P extends MvpPresenter> extends Fragment implements MvpView {
+public abstract class BaseMvpFragment<P extends MvpPresenter, N> extends Fragment implements MvpView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    protected N navigator;
     protected P mvpPresenter;
 
     private Unbinder unbinder;

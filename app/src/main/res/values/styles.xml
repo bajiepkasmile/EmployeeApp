@@ -1,3 +1,18 @@
-<resources>
-
+<resources xmlns:tools="http://schemas.android.com/tools">
+	
+	<style name="toolbar">
+		<item name="android:background">@color/primary</item>
+		<item name="android:theme">@style/ToolbarTheme</item>
+		<item name="android:elevation" tools:targetApi="lollipop">@dimen/elevation_toolbar</item>
+	</style>
+	
+	<style name="employee_attribute_title">
+		<item name="android:textSize">@dimen/font_big</item>
+		<item name="android:textColor">@color/black</item>
+	</style>
+	
+	<style name="employee_attribute">
+		<item name="android:textSize">@dimen/font_normal</item>
+	</style>
+	
 </resources>

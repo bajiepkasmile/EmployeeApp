@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	
-	<color name="primary">#3F51B5</color>
-	<color name="primary_dark">#303F9F</color>
-	<color name="accent">#FF4081</color>
+	<color name="primary">@color/blue</color>
+	<color name="primary_dark">@color/blue_dark</color>
+	<color name="accent">@color/pink</color>
+	
+	<color name="blue">#3F51B5</color>
+	<color name="blue_dark">#303F9F</color>
+	<color name="pink">#FF4081</color>
+	
+	<color name="white">#FFF</color>
+	<color name="gray_light">#BCBCBC</color>
+	<color name="black">#000</color>
+	
+	<color name="transparent_black">#D0000000</color>
+	<color name="transparent_blue">#D0303F9F</color>
+	<color name="transparent_pink">#D0FF4081</color>
 	
 </resources>

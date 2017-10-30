@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="180dp"
+	android:layout_height="180dp"
+	>
+	
+	<android.support.constraint.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		>
+		
+		<ImageView
+			android:id="@+id/iv_avatar"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:src="@drawable/ic_person"
+			android:background="@color/gray_light"
+			android:contentDescription="@string/content_description.avatar"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_full_name"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:paddingTop="@dimen/spacing_small"
+			android:paddingBottom="@dimen/spacing_tinier"
+			android:paddingLeft="@dimen/spacing_normal"
+			android:paddingRight="@dimen/spacing_normal"
+			android:textColor="@color/white"
+			android:textSize="@dimen/font_big"
+			android:lines="1"
+			android:ellipsize="end"
+			android:background="@color/transparent_pink"
+			app:layout_constraintBottom_toTopOf="@id/tv_age"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			tools:text="Иван Иванов"
+			/>
+		
+		<TextView
+			android:id="@+id/tv_age"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:paddingBottom="@dimen/spacing_small"
+			android:paddingLeft="@dimen/spacing_normal"
+			android:paddingRight="@dimen/spacing_normal"
+			android:textColor="@color/gray_light"
+			android:textStyle="italic"
+			android:textSize="@dimen/font_normal"
+			android:lines="1"
+			android:ellipsize="end"
+			android:background="@color/transparent_pink"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			tools:text="26 лет"
+			/>
+		
+	</android.support.constraint.ConstraintLayout>
+	
+</android.support.v7.widget.CardView>
