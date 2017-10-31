@@ -48,7 +48,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
     protected Employee(Parcel in) {
         firstName = in.readString();
         lastName = in.readString();
-        birthdayDate = new Date(in.readLong());
+        birthdayDate = birthdayTimeToBirthdayDate(in.readLong());
         avatarUrl = in.readString();
         specialityId = in.readLong();
         speciality = in.readString();
@@ -58,7 +58,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(firstName);
         dest.writeString(lastName);
-        dest.writeLong(birthdayDate.getTime());
+        dest.writeLong(getBirthdayTime());
         dest.writeString(avatarUrl);
         dest.writeLong(specialityId);
         dest.writeString(speciality);
@@ -74,7 +74,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
         return new Employee(
                 firstName,
                 lastName,
-                new Date(birthdayDate.getTime()),
+                getBirthdayDateCopy(),
                 avatarUrl,
                 specialityId,
                 speciality);
@@ -102,5 +102,26 @@ public class Employee implements Parcelable, Copyable<Employee> {
 
     public String getSpeciality() {
         return speciality;
+    }
+
+    private Date getBirthdayDateCopy() {
+        if (birthdayDate != null)
+            return new Date(birthdayDate.getTime());
+        else
+            return null;
+    }
+
+    private long getBirthdayTime() {
+        if (birthdayDate != null)
+            return birthdayDate.getTime();
+        else
+            return  -1;
+    }
+
+    private Date birthdayTimeToBirthdayDate(long birthdayTime) {
+        if (birthdayTime == -1)
+            return null;
+        else
+            return new Date(birthdayTime);
     }
 }

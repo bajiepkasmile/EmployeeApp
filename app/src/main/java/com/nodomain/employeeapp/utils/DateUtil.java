@@ -40,6 +40,9 @@ public class DateUtil {
     }
 
     public static int dateToAge(Date date) {
+        if (date == null)
+            return 0;
+
         Calendar birthday = Calendar.getInstance();
         birthday.setTime(date);
         int birthdayYear = birthday.get(Calendar.YEAR);

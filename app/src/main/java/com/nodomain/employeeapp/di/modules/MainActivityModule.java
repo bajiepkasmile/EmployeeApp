@@ -2,7 +2,7 @@ package com.nodomain.employeeapp.di.modules;
 
 
 import com.nodomain.employeeapp.di.scopes.PerActivity;
-import com.nodomain.employeeapp.navigation.MainNavigator;
+import com.nodomain.employeeapp.presentation.navigation.MainNavigator;
 
 import dagger.Module;
 import dagger.Provides;

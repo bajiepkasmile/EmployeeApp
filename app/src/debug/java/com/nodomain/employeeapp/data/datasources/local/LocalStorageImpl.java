@@ -3,24 +3,25 @@ package com.nodomain.employeeapp.data.datasources.local;
 
 import com.nodomain.employeeapp.model.Employee;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import static com.nodomain.employeeapp.data.datasources.EmployeeGenerator.generateRandomEmployee;
+import static com.nodomain.employeeapp.develop.DevelopUtil.sleep;
 import static com.nodomain.employeeapp.utils.ListUtil.copyListDeep;
 
 
 public class LocalStorageImpl implements LocalStorage {
 
-    private List<Employee> employees = Arrays.asList(
-            new Employee("FNaMe1", "LNamE1", new Date(23587209), "", 101, "Менеджер"),
-            new Employee("FName2", "lNAme2", null, "", 101, "Менеджер"),
-            new Employee("fNaMe4", "lNamE4", new Date(23364203), "", 102, "Разработчик"),
-            new Employee("FNamE7", "LNAMe7", null, "", 102, "Разработчик")
-    );
+    private List<Employee> employees = new ArrayList<>();
+
+    {
+        if (Math.random() < 0.5)  //emulate empty or filled database
+            for (int i = 0; i < 4; i++)
+                employees.add(generateRandomEmployee(i));
+    }
 
     @Inject
     public LocalStorageImpl() {
@@ -28,14 +29,13 @@ public class LocalStorageImpl implements LocalStorage {
 
     @Override
     public List<Employee> getEmployees() {
-        if (employees == null)
-            return Collections.emptyList();
-        else
-            return copyListDeep(employees);  //return deep copy to achieve immutability of local storage
+        sleep(1500);
+        return copyListDeep(employees);  //return deep copy to achieve immutability of local storage
     }
 
     @Override
     public void setEmployees(List<Employee> employees) {
+        sleep(1500);
         this.employees = copyListDeep(employees);  //save deep copy to achieve immutability of local storage
     }
 }

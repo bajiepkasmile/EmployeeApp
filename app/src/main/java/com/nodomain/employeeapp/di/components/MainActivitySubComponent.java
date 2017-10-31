@@ -5,8 +5,8 @@ import com.nodomain.employeeapp.di.modules.MainActivityModule;
 import com.nodomain.employeeapp.di.modules.NavigatorsModule;
 import com.nodomain.employeeapp.di.modules.PresentersModule;
 import com.nodomain.employeeapp.di.scopes.PerActivity;
-import com.nodomain.employeeapp.ui.fragments.EmployeeDetailsFragment;
-import com.nodomain.employeeapp.ui.fragments.EmployeeListFragment;
+import com.nodomain.employeeapp.presentation.ui.fragments.EmployeeDetailsFragment;
+import com.nodomain.employeeapp.presentation.ui.fragments.EmployeeListFragment;
 
 import dagger.Subcomponent;
 

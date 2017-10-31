@@ -9,8 +9,9 @@
 	<string name="birthday">Дата рождения:</string>
 	<string name="age">Возраст:</string>
 	<string name="speciality">Специальность:</string>
+	<string name="zero_age">-</string>
 	
-	<string name="error.network_is_not_available">Нет сети</string>
+	<string name="error.network_is_not_available">Нет сети. Данные могут быть неактуальны</string>
 	<string name="error.connection_failed">Ошибка соединения с сервером</string>
 	
 	<string name="content_description.avatar">Аватар</string>

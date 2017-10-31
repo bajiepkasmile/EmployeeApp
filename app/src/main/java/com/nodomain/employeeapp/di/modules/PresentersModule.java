@@ -1,10 +1,10 @@
 package com.nodomain.employeeapp.di.modules;
 
 
-import com.nodomain.employeeapp.mvp.presenters.EmployeeDetailsMvpPresenter;
-import com.nodomain.employeeapp.mvp.presenters.EmployeeListMvpPresenter;
-import com.nodomain.employeeapp.mvp.presentersimpl.EmployeeDetailsMvpPresenterImpl;
-import com.nodomain.employeeapp.mvp.presentersimpl.EmployeeListMvpPresenterImpl;
+import com.nodomain.employeeapp.presentation.mvp.presenters.EmployeeDetailsMvpPresenter;
+import com.nodomain.employeeapp.presentation.mvp.presenters.EmployeeListMvpPresenter;
+import com.nodomain.employeeapp.presentation.mvp.presentersimpl.EmployeeDetailsMvpPresenterImpl;
+import com.nodomain.employeeapp.presentation.mvp.presentersimpl.EmployeeListMvpPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
