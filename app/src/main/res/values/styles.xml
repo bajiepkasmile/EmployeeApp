@@ -6,12 +6,12 @@
 		<item name="android:elevation" tools:targetApi="lollipop">@dimen/elevation_toolbar</item>
 	</style>
 	
-	<style name="employee_attribute_title">
+	<style name="employee_parameter_title">
 		<item name="android:textSize">@dimen/font_big</item>
 		<item name="android:textColor">@color/black</item>
 	</style>
 	
-	<style name="employee_attribute">
+	<style name="employee_parameter">
 		<item name="android:textSize">@dimen/font_normal</item>
 	</style>
 	

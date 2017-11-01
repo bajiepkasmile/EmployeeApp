@@ -1,16 +1,33 @@
 package com.nodomain.employeeapp.data.datasources.remote;
 
 
+import com.nodomain.employeeapp.data.datasources.remote.impl.DtoMapper;
+import com.nodomain.employeeapp.data.datasources.remote.impl.ServerApiConstants;
+import com.nodomain.employeeapp.data.datasources.remote.impl.Response;
+import com.nodomain.employeeapp.data.datasources.remote.impl.ServerApi;
+import com.nodomain.employeeapp.data.datasources.remote.impl.dtos.EmployeeDto;
+import com.nodomain.employeeapp.data.datasources.remote.impl.dtos.SpecialityDto;
+import com.nodomain.employeeapp.develop.DevelopUtil;
+import com.nodomain.employeeapp.domain.exceptions.ConnectionFailedException;
 import com.nodomain.employeeapp.model.Employee;
+import com.nodomain.employeeapp.model.Speciality;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.nodomain.employeeapp.develop.DevelopUtil.TODO;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class RemoteStorageImpl implements RemoteStorage{
+
+    private final ServerApi serverApi = new Retrofit.Builder()
+            .baseUrl(ServerApiConstants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ServerApi.class);;
 
     @Inject
     public RemoteStorageImpl() {
@@ -18,6 +35,12 @@ public class RemoteStorageImpl implements RemoteStorage{
 
     @Override
     public List<Employee> getEmployees() {
-        return TODO();  //TODO
+        try {
+            Response response = serverApi.getEmployees().execute().body();
+            return DtoMapper.fromEmployeeDtos(response.employeeDtos);
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            throw new ConnectionFailedException();
+        }
     }
 }

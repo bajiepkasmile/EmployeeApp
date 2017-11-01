@@ -4,9 +4,11 @@ package com.nodomain.employeeapp.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.nodomain.employeeapp.utils.Copyable;
+import com.nodomain.employeeapp.utils.collection.CollectionUtil;
+import com.nodomain.employeeapp.utils.collection.Copyable;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class Employee implements Parcelable, Copyable<Employee> {
@@ -15,8 +17,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
     private final String lastName;
     private final Date birthdayDate;
     private final String avatarUrl;
-    private final long specialityId;
-    private final String speciality;
+    private final List<Speciality> specialities;
 
     public static final Creator<Employee> CREATOR = new Creator<Employee>() {
         @Override
@@ -30,27 +31,12 @@ public class Employee implements Parcelable, Copyable<Employee> {
         }
     };
 
-    public Employee(String firstName,
-                    String lastName,
-                    Date birthdayDate,
-                    String avatarUrl,
-                    long specialityId,
-                    String speciality) {
+    public Employee(String firstName, String lastName, Date birthdayDate, String avatarUrl, List<Speciality> specialities) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthdayDate = birthdayDate;
         this.avatarUrl = avatarUrl;
-        this.specialityId = specialityId;
-        this.speciality = speciality;
-    }
-
-    public Employee(String firstName,
-                    String lastName,
-                    long birthdayTime,
-                    String avatarUrl,
-                    long specialityId,
-                    String speciality) {
-        this(firstName, lastName, birthdayTimeToBirthdayDate(birthdayTime), avatarUrl, specialityId, speciality);
+        this.specialities = specialities;
     }
 
     protected Employee(Parcel in) {
@@ -58,8 +44,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
         lastName = in.readString();
         birthdayDate = birthdayTimeToBirthdayDate(in.readLong());
         avatarUrl = in.readString();
-        specialityId = in.readLong();
-        speciality = in.readString();
+        specialities = in.createTypedArrayList(Speciality.CREATOR);
     }
 
     private static Date birthdayTimeToBirthdayDate(long birthdayTime) {
@@ -75,8 +60,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
         dest.writeString(lastName);
         dest.writeLong(getBirthdayTime());
         dest.writeString(avatarUrl);
-        dest.writeLong(specialityId);
-        dest.writeString(speciality);
+        dest.writeTypedList(specialities);
     }
 
     @Override
@@ -91,8 +75,7 @@ public class Employee implements Parcelable, Copyable<Employee> {
                 lastName,
                 getBirthdayDateCopy(),
                 avatarUrl,
-                specialityId,
-                speciality);
+                CollectionUtil.copyCollectionDeep(specialities));
     }
 
     public String getFirstName() {
@@ -111,19 +94,15 @@ public class Employee implements Parcelable, Copyable<Employee> {
         return avatarUrl;
     }
 
-    public long getSpecialityId() {
-        return specialityId;
+    public List<Speciality> getSpecialities() {
+        return specialities;
     }
 
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public long getBirthdayTime() {
+    private long getBirthdayTime() {
         if (birthdayDate != null)
             return birthdayDate.getTime();
         else
-            return  -1;
+            return -1;
     }
 
     private Date getBirthdayDateCopy() {

@@ -17,13 +17,14 @@ import android.widget.Toast;
 import com.nodomain.employeeapp.R;
 import com.nodomain.employeeapp.domain.Error;
 import com.nodomain.employeeapp.model.Employee;
+import com.nodomain.employeeapp.model.Speciality;
 import com.nodomain.employeeapp.presentation.mvp.presenters.EmployeeListMvpPresenter;
 import com.nodomain.employeeapp.presentation.mvp.views.EmployeeListMvpView;
 import com.nodomain.employeeapp.presentation.navigation.EmployeeListNavigator;
 import com.nodomain.employeeapp.presentation.ui.activities.MainActivity;
 import com.nodomain.employeeapp.presentation.ui.listeners.OnItemClickListener;
 import com.nodomain.employeeapp.presentation.ui.recyclerviews.adapters.EmployeesAdapter;
-import com.nodomain.employeeapp.utils.DateUtil;
+import com.nodomain.employeeapp.utils.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +56,12 @@ public class EmployeeListFragment
     String titleLoading;
 
     @Inject
-    DateUtil dateUtil;
+    FormatUtil formatUtil;
 
     private EmployeesAdapter employeesAdapter;
-    private ArrayAdapter<String> specialitiesAdapter;
+    private ArrayAdapter<Speciality> specialitiesAdapter;
     private List<Employee> employees;
-    private List<String> specialities;
+    private List<Speciality> specialities;
     private int selectedSpecialityPosition;
     private boolean inUpdatingProgress;
 
@@ -182,7 +183,7 @@ public class EmployeeListFragment
     }
 
     private void showEmployeesWithSelectedSpecialityOrEmptyList() {
-        String speciality = spinnerSpecialities.getSelectedItem().toString();
+        Speciality speciality = (Speciality) spinnerSpecialities.getSelectedItem();
         List<Employee> pickedEmployees = pickEmployeesBySpeciality(speciality);
         if (pickedEmployees.size() != 0)
             showEmployees(pickedEmployees);
@@ -195,7 +196,7 @@ public class EmployeeListFragment
         tvListIsEmpty.setVisibility(View.GONE);
 
         if (employeesAdapter == null) {
-            employeesAdapter = new EmployeesAdapter(dateUtil, employees, this);
+            employeesAdapter = new EmployeesAdapter(formatUtil, employees, this);
             rvEmployees.setAdapter(employeesAdapter);
         } else if (rvEmployees.getAdapter() == null)
             rvEmployees.setAdapter(employeesAdapter);
@@ -208,18 +209,19 @@ public class EmployeeListFragment
         tvListIsEmpty.setVisibility(View.VISIBLE);
     }
 
-    private List<String> pickSpecialitiesFromEmployees(List<Employee> employees) {
-        Set<String> specialities = new TreeSet<>();
+    private List<Speciality> pickSpecialitiesFromEmployees(List<Employee> employees) {
+        Set<Speciality> specialities = new TreeSet<>();
         for (Employee employee : employees)
-            specialities.add(employee.getSpeciality());
+            specialities.addAll(employee.getSpecialities());
         return new ArrayList<>(specialities);
     }
 
-    private List<Employee> pickEmployeesBySpeciality(String speciality) {
+    private List<Employee> pickEmployeesBySpeciality(Speciality speciality) {
         List<Employee> pickedEmployees = new ArrayList<>();
         for (Employee employee : employees)
-            if (employee.getSpeciality().equals(speciality))
-                pickedEmployees.add(employee);
+            for (Speciality employeeSpeciality : employee.getSpecialities())
+                if (employeeSpeciality.equals(speciality))
+                    pickedEmployees.add(employee);
         return pickedEmployees;
     }
 }

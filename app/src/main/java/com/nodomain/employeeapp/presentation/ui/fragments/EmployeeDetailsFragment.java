@@ -13,12 +13,15 @@ import android.widget.TextView;
 import com.nodomain.employeeapp.R;
 import com.nodomain.employeeapp.domain.Error;
 import com.nodomain.employeeapp.model.Employee;
+import com.nodomain.employeeapp.model.Speciality;
 import com.nodomain.employeeapp.presentation.mvp.presenters.EmployeeDetailsMvpPresenter;
 import com.nodomain.employeeapp.presentation.mvp.views.EmployeeDetailsMvpView;
 import com.nodomain.employeeapp.presentation.navigation.EmployeeDetailsNavigator;
 import com.nodomain.employeeapp.presentation.ui.activities.MainActivity;
-import com.nodomain.employeeapp.utils.DateUtil;
+import com.nodomain.employeeapp.utils.FormatUtil;
 import com.squareup.picasso.Picasso;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -35,11 +38,11 @@ public class EmployeeDetailsFragment
     TextView tvBirthday;
     @BindView(R.id.tv_age)
     TextView tvAge;
-    @BindView(R.id.tv_speciality)
-    TextView tvSpeciality;
+    @BindView(R.id.tv_specialities)
+    TextView tvSpecialities;
 
     @Inject
-    DateUtil dateUtil;
+    FormatUtil formatUtil;
 
     private static final String ARG_EMPLOYEE = "employee";
 
@@ -83,8 +86,9 @@ public class EmployeeDetailsFragment
     @Override
     public void showEmployeeDetails(Employee employee) {
         String fullName = getString(R.string.employee_full_name, employee.getFirstName(), employee.getLastName());
-        String birthdayStr = dateUtil.dateToBirthdayStr(employee.getBirthdayDate());
-        String ageStr = dateUtil.dateToAgeStr(employee.getBirthdayDate());
+        String birthdayStr = formatUtil.dateToBirthdayStr(employee.getBirthdayDate());
+        String ageStr = formatUtil.dateToAgeStr(employee.getBirthdayDate());
+        String specialities = formatUtil.specialitiesToStr(employee.getSpecialities());
 
         Picasso.with(getContext())
                 .load(employee.getAvatarUrl())
@@ -93,7 +97,7 @@ public class EmployeeDetailsFragment
         setTitle(fullName);
         tvBirthday.setText(birthdayStr);
         tvAge.setText(ageStr);
-        tvSpeciality.setText(employee.getSpeciality());
+        tvSpecialities.setText(specialities);
     }
 
     @Override
@@ -108,4 +112,6 @@ public class EmployeeDetailsFragment
     private Employee getEmployeeFromArgs() {
         return getArguments().getParcelable(ARG_EMPLOYEE);
     }
+
+
 }

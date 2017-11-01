@@ -6,7 +6,7 @@ import com.nodomain.employeeapp.model.Employee;
 import java.util.Collections;
 import java.util.List;
 
-import static com.nodomain.employeeapp.utils.ListUtil.copyListDeep;
+import static com.nodomain.employeeapp.utils.collection.CollectionUtil.copyCollectionDeep;
 
 
 public class Cache {
@@ -21,10 +21,10 @@ public class Cache {
         if (employees == null)
             return Collections.emptyList();
         else
-            return copyListDeep(employees);  //return deep copy to achieve immutability of cache
+            return copyCollectionDeep(employees);  //return deep copy to achieve immutability of cache
     }
 
     public void setEmployees(List<Employee> employees) {
-        this.employees = copyListDeep(employees);  //save deep copy to achieve immutability of cache
+        this.employees = copyCollectionDeep(employees);  //save deep copy to achieve immutability of cache
     }
 }

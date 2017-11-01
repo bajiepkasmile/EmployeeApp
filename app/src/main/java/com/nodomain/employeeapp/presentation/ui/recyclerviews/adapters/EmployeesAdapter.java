@@ -11,7 +11,7 @@ import com.nodomain.employeeapp.R;
 import com.nodomain.employeeapp.model.Employee;
 import com.nodomain.employeeapp.presentation.ui.listeners.OnItemClickListener;
 import com.nodomain.employeeapp.presentation.ui.recyclerviews.viewholders.EmployeeViewHolder;
-import com.nodomain.employeeapp.utils.DateUtil;
+import com.nodomain.employeeapp.utils.FormatUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -19,13 +19,13 @@ import java.util.List;
 
 public class EmployeesAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
 
-    private final DateUtil dateUtil;
+    private final FormatUtil formatUtil;
 
     private List<Employee> employees;
     private OnItemClickListener listener;
 
-    public EmployeesAdapter(DateUtil dateUtil, List<Employee> employees, OnItemClickListener listener) {
-        this.dateUtil = dateUtil;
+    public EmployeesAdapter(FormatUtil formatUtil, List<Employee> employees, OnItemClickListener listener) {
+        this.formatUtil = formatUtil;
         this.employees = employees;
         this.listener = listener;
     }
@@ -42,7 +42,7 @@ public class EmployeesAdapter extends RecyclerView.Adapter<EmployeeViewHolder> {
         Context context = holder.ivAvatar.getContext();
 
         String fullName = context.getString(R.string.employee_full_name, employee.getFirstName(), employee.getLastName());
-        String ageStr = dateUtil.dateToAgeStr(employee.getBirthdayDate());
+        String ageStr = formatUtil.dateToAgeStr(employee.getBirthdayDate());
 
         holder.tvFullName.setText(fullName);
         holder.tvAge.setText(ageStr);

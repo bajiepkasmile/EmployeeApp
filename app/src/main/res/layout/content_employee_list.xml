@@ -19,7 +19,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="@string/birthday"
-			style="@style/employee_attribute_title"
+			style="@style/employee_parameter_title"
 			/>
 		
 		<TextView
@@ -30,7 +30,7 @@
 			android:layout_marginLeft="@dimen/spacing_small"
 			android:layout_marginRight="@dimen/spacing_small"
 			tools:text="20.07.2000"
-			style="@style/employee_attribute"
+			style="@style/employee_parameter"
 			/>
 		
 		<TextView
@@ -38,7 +38,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_big"
 			android:text="@string/age"
-			style="@style/employee_attribute_title"
+			style="@style/employee_parameter_title"
 			/>
 		
 		<TextView
@@ -49,26 +49,26 @@
 			android:layout_marginLeft="@dimen/spacing_small"
 			android:layout_marginRight="@dimen/spacing_small"
 			tools:text="17 лет"
-			style="@style/employee_attribute"
+			style="@style/employee_parameter"
 			/>
 		
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_big"
-			android:text="@string/speciality"
-			style="@style/employee_attribute_title"
+			android:text="@string/name"
+			style="@style/employee_parameter_title"
 			/>
 		
 		<TextView
-			android:id="@+id/tv_speciality"
+			android:id="@+id/tv_specialities"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/spacing_tiny"
 			android:layout_marginLeft="@dimen/spacing_small"
 			android:layout_marginRight="@dimen/spacing_small"
 			tools:text="Разработчик"
-			style="@style/employee_attribute"
+			style="@style/employee_parameter"
 			/>
 	
 	</LinearLayout>

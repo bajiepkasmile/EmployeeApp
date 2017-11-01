@@ -4,6 +4,7 @@ package com.nodomain.employeeapp.utils;
 import android.content.Context;
 
 import com.nodomain.employeeapp.R;
+import com.nodomain.employeeapp.model.Speciality;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,40 +17,32 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 
-public class DateUtil {
+public class FormatUtil {
 
     private static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
     private static final Locale LOCALE_RU = new Locale("ru","RU");
     private static final SimpleDateFormat BIRTHDAY_FORMAT = new SimpleDateFormat("dd.MM.yyyy", LOCALE_RU);
-    private static final List<SimpleDateFormat> DATE_FORMATS = Arrays.asList(
-            new SimpleDateFormat("yyyy-MM-dd", LOCALE_RU),
-            new SimpleDateFormat("dd-MM-yyyy", LOCALE_RU));
-
-    static {
-        for (SimpleDateFormat dateFormat : DATE_FORMATS)
-            dateFormat.setLenient(false);
-    }
 
     private final Context context;
 
     @Inject
-    public DateUtil(Context context) {
+    public FormatUtil(Context context) {
         this.context = context;
     }
 
-    public Date parseDate(String dateStr) {
-        if (dateStr == null)
-            return null;
+    public String specialitiesToStr(List<Speciality> specialities) {
+        if (specialities == null || specialities.size() == 0)
+            return context.getString(R.string.dash);
 
-        for (SimpleDateFormat dateFormat : DATE_FORMATS)
-            try {
-                dateFormat.setLenient(false);
-                return dateFormat.parse(dateStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
+        StringBuilder sbSpecialities = new StringBuilder();
+        sbSpecialities.append(specialities.get(0));
+        if (specialities.size() > 1)
+            for(int i = 1; i < specialities.size(); i++) {
+                sbSpecialities.append(", ");
+                sbSpecialities.append(specialities.get(i));
             }
 
-        return null;
+        return sbSpecialities.toString();
     }
 
     public String dateToBirthdayStr(Date date) {

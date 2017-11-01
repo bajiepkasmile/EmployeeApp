@@ -8,7 +8,7 @@
 	<string name="employee_full_name">%1$s %2$s</string>
 	<string name="birthday">Дата рождения:</string>
 	<string name="age">Возраст:</string>
-	<string name="speciality">Специальность:</string>
+	<string name="name">Специальность:</string>
 	<string name="dash">-</string>
 	
 	<string name="message.updating_success">Данные успешно обновлены</string>

@@ -4,9 +4,12 @@ package com.nodomain.employeeapp.data.datasources;
 import android.util.Pair;
 
 import com.nodomain.employeeapp.model.Employee;
+import com.nodomain.employeeapp.model.Speciality;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class EmployeeGenerator {
@@ -21,11 +24,20 @@ public class EmployeeGenerator {
         String firstName = "Fname" + index;
         String lastName = "Lname" + index;
         Date birthdayDate = generateRandomNullableAgeDate();
-        Pair<Long, String > specialityPair = generateRandomSpecialityPair();
-        long specialityId = specialityPair.first;
-        String speciality = specialityPair.second;
+        List<Speciality> specialities = generateRandomSpecialities();
+        return new Employee(firstName, lastName, birthdayDate, null, specialities);
+    }
 
-        return new Employee(firstName, lastName, birthdayDate, null, specialityId, speciality);
+    private static List<Speciality> generateRandomSpecialities() {
+        List<Speciality> specialities = new ArrayList<>();
+        if (Math.random() < 0.4) {
+            specialities.add(new Speciality(SPECIALITY_MANAGER_ID, SPECIALITY_MANAGER));
+            specialities.add(new Speciality(SPECIALITY_MANAGER_ID, SPECIALITY_MANAGER));
+        } else {
+            Pair<Long, String > specialityPair = generateRandomSpecialityPair();
+            specialities.add(new Speciality(specialityPair.first, specialityPair.second));
+        }
+        return specialities;
     }
 
     private static Pair<Long, String> generateRandomSpecialityPair() {
