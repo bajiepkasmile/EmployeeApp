@@ -8,6 +8,4 @@ import com.nodomain.employeeapp.presentation.navigation.EmployeeListNavigator;
 public interface EmployeeListMvpPresenter extends MvpPresenter<EmployeeListMvpView>, EmployeeListNavigator {
 
     void updateEmployees();
-
-    void getEmployees();
 }

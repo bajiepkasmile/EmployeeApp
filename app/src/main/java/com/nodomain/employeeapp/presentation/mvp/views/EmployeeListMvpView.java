@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface EmployeeListMvpView extends MvpView {
 
-    void showEmployees(List<Employee> employees);
+    void showUpdatedEmployees(List<Employee> employees);
+
+    void showUpdatingProgress();
+
+    void hideUpdatingProgress();
+
+    void notifyUpdatingSuccess();
 
     void showEmployeeDetailsView(Employee employee);
-
-    void showProgress();
-
-    void hideProgress();
 }

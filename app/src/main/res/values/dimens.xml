@@ -17,9 +17,10 @@
 	<dimen name="font_small">14sp</dimen>
 	
 	<!--Specific dimens-->
+	<dimen name="height_expanded_toolbar">200dp</dimen>
+	<dimen name="height_employee_item">180dp</dimen>
+	<dimen name="size_progress_bar">48dp</dimen>
+	<dimen name="margin_item_speciality">44dp</dimen>
 	<dimen name="elevation_toolbar">4dp</dimen>
-	<dimen name="progress_bar_size">48dp</dimen>
-	<dimen name="expanded_toolbar_height">200dp</dimen>
-	<dimen name="employee_item_height">180dp</dimen>
 	
 </resources>

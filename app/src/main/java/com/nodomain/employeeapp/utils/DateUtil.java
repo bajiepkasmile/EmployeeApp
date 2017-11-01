@@ -1,6 +1,10 @@
 package com.nodomain.employeeapp.utils;
 
 
+import android.content.Context;
+
+import com.nodomain.employeeapp.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -8,6 +12,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 
 public class DateUtil {
@@ -24,7 +30,14 @@ public class DateUtil {
             dateFormat.setLenient(false);
     }
 
-    public static Date parseDate(String dateStr) {
+    private final Context context;
+
+    @Inject
+    public DateUtil(Context context) {
+        this.context = context;
+    }
+
+    public Date parseDate(String dateStr) {
         if (dateStr == null)
             return null;
 
@@ -39,7 +52,22 @@ public class DateUtil {
         return null;
     }
 
-    public static int dateToAge(Date date) {
+    public String dateToBirthdayStr(Date date) {
+        if (date == null)
+            return context.getString(R.string.dash);
+        else
+            return BIRTHDAY_FORMAT.format(date);
+    }
+
+    public String dateToAgeStr(Date birthdayDate) {
+        int age = dateToAge(birthdayDate);
+        if (age == 0)
+            return context.getString(R.string.dash);
+        else
+            return context.getResources().getQuantityString(R.plurals.age, age, age);
+    }
+
+    private int dateToAge(Date date) {
         if (date == null)
             return 0;
 
@@ -47,9 +75,5 @@ public class DateUtil {
         birthday.setTime(date);
         int birthdayYear = birthday.get(Calendar.YEAR);
         return CURRENT_YEAR - birthdayYear;
-    }
-
-    public static String dateToBirthdayStr(Date date) {
-        return BIRTHDAY_FORMAT.format(date);
     }
 }

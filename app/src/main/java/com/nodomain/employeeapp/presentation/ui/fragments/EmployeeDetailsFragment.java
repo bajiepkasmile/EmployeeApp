@@ -17,12 +17,12 @@ import com.nodomain.employeeapp.presentation.mvp.presenters.EmployeeDetailsMvpPr
 import com.nodomain.employeeapp.presentation.mvp.views.EmployeeDetailsMvpView;
 import com.nodomain.employeeapp.presentation.navigation.EmployeeDetailsNavigator;
 import com.nodomain.employeeapp.presentation.ui.activities.MainActivity;
+import com.nodomain.employeeapp.utils.DateUtil;
 import com.squareup.picasso.Picasso;
 
-import butterknife.BindView;
+import javax.inject.Inject;
 
-import static com.nodomain.employeeapp.utils.DateUtil.dateToAge;
-import static com.nodomain.employeeapp.utils.DateUtil.dateToBirthdayStr;
+import butterknife.BindView;
 
 
 public class EmployeeDetailsFragment
@@ -37,6 +37,9 @@ public class EmployeeDetailsFragment
     TextView tvAge;
     @BindView(R.id.tv_speciality)
     TextView tvSpeciality;
+
+    @Inject
+    DateUtil dateUtil;
 
     private static final String ARG_EMPLOYEE = "employee";
 
@@ -80,9 +83,8 @@ public class EmployeeDetailsFragment
     @Override
     public void showEmployeeDetails(Employee employee) {
         String fullName = getString(R.string.employee_full_name, employee.getFirstName(), employee.getLastName());
-        String birthdayStr = dateToBirthdayStr(employee.getBirthdayDate());
-        int age = dateToAge(employee.getBirthdayDate());
-        String ageStr = getResources().getQuantityString(R.plurals.age, age, age);
+        String birthdayStr = dateUtil.dateToBirthdayStr(employee.getBirthdayDate());
+        String ageStr = dateUtil.dateToAgeStr(employee.getBirthdayDate());
 
         Picasso.with(getContext())
                 .load(employee.getAvatarUrl())

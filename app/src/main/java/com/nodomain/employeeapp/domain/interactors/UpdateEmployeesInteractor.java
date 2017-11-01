@@ -3,7 +3,10 @@ package com.nodomain.employeeapp.domain.interactors;
 
 import android.os.Handler;
 
+import com.nodomain.employeeapp.data.DataSourceType;
 import com.nodomain.employeeapp.data.repositories.EmployeesRepository;
+import com.nodomain.employeeapp.domain.Error;
+import com.nodomain.employeeapp.domain.events.GetEmployeesSuccessEvent;
 import com.nodomain.employeeapp.domain.events.UpdateEmployeesFailureEvent;
 import com.nodomain.employeeapp.domain.events.UpdateEmployeesSuccessEvent;
 import com.nodomain.employeeapp.domain.exceptions.ConnectionFailedException;
@@ -16,10 +19,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
-
-import static com.nodomain.employeeapp.data.DataSourceType.REMOTE;
-import static com.nodomain.employeeapp.domain.Error.CONNECTION_FAILED;
-import static com.nodomain.employeeapp.domain.Error.NETWORK_IS_NOT_AVAILABLE;
 
 
 public class UpdateEmployeesInteractor extends BaseInteractor<Void> {
@@ -40,20 +39,45 @@ public class UpdateEmployeesInteractor extends BaseInteractor<Void> {
 
     @Override
     public void execute(Void aVoid) {
-        boolean networkIsNotAvailable = !networkUtil.networkIsAvailable();
+        if (networkUtil.networkIsAvailable())
+            processNetworkIsAvailableCase();
+        else
+            processNetworkIsNotAvailableCase();
 
-        if (networkIsNotAvailable) {
-            postStickyEvent(new UpdateEmployeesFailureEvent(NETWORK_IS_NOT_AVAILABLE));
+    }
+
+    private void processNetworkIsAvailableCase() {
+        inBackground(() -> {
+            try {
+                List<Employee> employees = repository.getEmployees(DataSourceType.REMOTE);
+                onMainThread(() -> postStickyEvent(new UpdateEmployeesSuccessEvent(employees)));
+            } catch (ConnectionFailedException e) {
+                onMainThread(() -> postStickyEvent(new UpdateEmployeesFailureEvent(Error.CONNECTION_FAILED)));
+
+                if (repository.hasCachedEmployees()) {
+                    List<Employee> employees = repository.getEmployees(DataSourceType.CACHE);
+                    onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
+                    return;
+                }
+
+                List<Employee> employees = repository.getEmployees(DataSourceType.LOCAL);
+                onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
+            }
+        });
+    }
+
+    private void processNetworkIsNotAvailableCase() {
+        postStickyEvent(new UpdateEmployeesFailureEvent(Error.NETWORK_IS_NOT_AVAILABLE));
+
+        if (repository.hasCachedEmployees()) {
+            List<Employee> employees = repository.getEmployees(DataSourceType.CACHE);
+            postStickyEvent(new GetEmployeesSuccessEvent(employees));
             return;
         }
 
         inBackground(() -> {
-            try {
-                List<Employee> employees = repository.getEmployees(REMOTE);
-                onMainThread(() -> postStickyEvent(new UpdateEmployeesSuccessEvent(employees)));
-            } catch (ConnectionFailedException e) {
-                onMainThread(() -> postStickyEvent(new UpdateEmployeesFailureEvent(CONNECTION_FAILED)));
-            }
+            List<Employee> employees = repository.getEmployees(DataSourceType.LOCAL);
+            onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
         });
     }
 }
