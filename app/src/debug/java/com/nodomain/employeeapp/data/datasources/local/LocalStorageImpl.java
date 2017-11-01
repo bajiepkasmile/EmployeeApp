@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 import static com.nodomain.employeeapp.data.datasources.EmployeeGenerator.generateRandomEmployee;
 import static com.nodomain.employeeapp.develop.DevelopUtil.sleep;
-import static com.nodomain.employeeapp.utils.ListUtil.copyListDeep;
+import static com.nodomain.employeeapp.utils.collection.CollectionUtil.copyCollectionDeep;
 
 
 public class LocalStorageImpl implements LocalStorage {
@@ -30,12 +30,12 @@ public class LocalStorageImpl implements LocalStorage {
     @Override
     public List<Employee> getEmployees() {
         sleep(1500);
-        return copyListDeep(employees);  //return deep copy to achieve immutability of local storage
+        return copyCollectionDeep(employees);  //return deep copy to achieve immutability of local storage
     }
 
     @Override
     public void setEmployees(List<Employee> employees) {
         sleep(1500);
-        this.employees = copyListDeep(employees);  //save deep copy to achieve immutability of local storage
+        this.employees = copyCollectionDeep(employees);  //save deep copy to achieve immutability of local storage
     }
 }

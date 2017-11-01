@@ -47,7 +47,6 @@ public abstract class BaseMvpFragment<P extends MvpPresenter, N> extends Fragmen
         unbinder = ButterKnife.bind(this, view);
         mvpPresenter.attachMvpView(this);
         setupActionBar();
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -65,6 +64,7 @@ public abstract class BaseMvpFragment<P extends MvpPresenter, N> extends Fragmen
     }
 
     protected void displayHomeButton() {
+        setHasOptionsMenu(true);
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

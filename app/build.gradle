@@ -1,13 +1,5 @@
 apply plugin: 'com.android.application'
 
-ext {
-    support_library_version = "26.1.0"
-    butterknife_version = "8.8.1"
-    retrofit2_version = "2.3.0"
-    dagger_version = "2.12"
-    cupboard_tools_version = "0.3.1"
-}
-
 android {
     signingConfigs {
         config {
@@ -40,6 +32,14 @@ android {
             signingConfig signingConfigs.config
         }
     }
+}
+
+ext {
+    support_library_version = "26.1.0"
+    butterknife_version = "8.8.1"
+    retrofit2_version = "2.3.0"
+    dagger_version = "2.12"
+    cupboard_tools_version = "0.3.1"
 }
 
 dependencies {

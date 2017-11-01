@@ -13,15 +13,12 @@ import android.widget.TextView;
 import com.nodomain.employeeapp.R;
 import com.nodomain.employeeapp.domain.Error;
 import com.nodomain.employeeapp.model.Employee;
-import com.nodomain.employeeapp.model.Speciality;
 import com.nodomain.employeeapp.presentation.mvp.presenters.EmployeeDetailsMvpPresenter;
 import com.nodomain.employeeapp.presentation.mvp.views.EmployeeDetailsMvpView;
 import com.nodomain.employeeapp.presentation.navigation.EmployeeDetailsNavigator;
 import com.nodomain.employeeapp.presentation.ui.activities.MainActivity;
 import com.nodomain.employeeapp.utils.FormatUtil;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -68,10 +65,8 @@ public class EmployeeDetailsFragment
         super.onViewCreated(view, savedInstanceState);
         displayHomeButton();
 
-        if (savedInstanceState == null) {
-            Employee employee = getEmployeeFromArgs();
-            mvpPresenter.getEmployeeDetails(employee);
-        }
+        Employee employee = getEmployeeFromArgs();
+        mvpPresenter.getEmployeeDetails(employee);
     }
 
     @Override

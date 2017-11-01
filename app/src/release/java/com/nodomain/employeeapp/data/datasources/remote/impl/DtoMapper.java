@@ -3,7 +3,6 @@ package com.nodomain.employeeapp.data.datasources.remote.impl;
 
 import com.nodomain.employeeapp.data.datasources.remote.impl.dtos.EmployeeDto;
 import com.nodomain.employeeapp.data.datasources.remote.impl.dtos.SpecialityDto;
-import com.nodomain.employeeapp.develop.DevelopUtil;
 import com.nodomain.employeeapp.model.Employee;
 import com.nodomain.employeeapp.model.Speciality;
 import com.nodomain.employeeapp.utils.collection.CollectionUtil;
@@ -24,6 +23,8 @@ public class DtoMapper {
             new SimpleDateFormat("dd-MM-yyyy", LOCALE_RU));
 
     static {
+        //That will make the parse method throw ParseException
+        //when the given input string is not in the specified format.
         for (SimpleDateFormat dateFormat : DATE_FORMATS)
             dateFormat.setLenient(false);
     }

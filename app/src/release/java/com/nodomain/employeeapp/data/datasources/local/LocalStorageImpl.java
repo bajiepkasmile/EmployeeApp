@@ -34,9 +34,7 @@ public class LocalStorageImpl implements LocalStorage {
     @Override
     public void setEmployees(List<Employee> employees) {
         SQLiteDatabase sqLiteDatabase = dbHelper.getWritableDatabase();
-//        cupboard().withDatabase(sqLiteDatabase).dropAllTables();
-
-//        cupboard().withDatabase(sqLiteDatabase).delete(EmployeeDbo.class, null);
+        cupboard().withDatabase(sqLiteDatabase).delete(EmployeeDbo.class, null);
         cupboard().withDatabase(sqLiteDatabase).put(DboMapper.toEmployeeDbos(employees));
     }
 }

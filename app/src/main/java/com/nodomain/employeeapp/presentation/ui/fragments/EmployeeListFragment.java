@@ -80,7 +80,10 @@ public class EmployeeListFragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (savedInstanceState == null)
+        //onSaveInstanceState is not called in backStack recreation of a fragment.
+        //However employees already available and can be displayed.
+        //Therefore, update employees only when the adapter is null
+        if (savedInstanceState == null && employeesAdapter == null)
             mvpPresenter.updateEmployees();
         else if (!inUpdatingProgress) {
             setTitle(null);
@@ -100,7 +103,7 @@ public class EmployeeListFragment
     }
 
     private int calculateNewSelectedSpecialityPosition() {
-        String previousSpeciality = (String) spinnerSpecialities.getSelectedItem();
+        Speciality previousSpeciality = (Speciality) spinnerSpecialities.getSelectedItem();
         if (specialities.contains(previousSpeciality))
             return specialities.indexOf(previousSpeciality);
         else

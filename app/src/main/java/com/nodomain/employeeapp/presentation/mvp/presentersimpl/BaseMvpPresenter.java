@@ -23,7 +23,7 @@ public class BaseMvpPresenter<V extends MvpView> implements MvpPresenter<V> {
 
         try {
             eventBus.register(this);
-        } catch (EventBusException e) {
+        } catch (EventBusException e) {  //when the subscriber does not have any subscription
             e.printStackTrace();
         }
     }

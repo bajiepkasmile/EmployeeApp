@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 import static com.nodomain.employeeapp.data.datasources.EmployeeGenerator.generateRandomEmployee;
 import static com.nodomain.employeeapp.develop.DevelopUtil.sleep;
-import static com.nodomain.employeeapp.utils.ListUtil.copyListDeep;
+import static com.nodomain.employeeapp.utils.collection.CollectionUtil.copyCollectionDeep;
 
 
 public class RemoteStorageImpl implements RemoteStorage {
@@ -29,6 +29,6 @@ public class RemoteStorageImpl implements RemoteStorage {
     @Override
     public List<Employee> getEmployees() {
         sleep(1500);
-        return copyListDeep(employees);  //return deep copy to achieve immutability of remote storage
+        return copyCollectionDeep(employees);  //return deep copy to achieve immutability of remote storage
     }
 }

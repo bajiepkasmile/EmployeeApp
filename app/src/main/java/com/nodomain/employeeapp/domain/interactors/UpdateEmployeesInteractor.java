@@ -52,16 +52,7 @@ public class UpdateEmployeesInteractor extends BaseInteractor<Void> {
                 List<Employee> employees = repository.getEmployees(DataSourceType.REMOTE);
                 onMainThread(() -> postStickyEvent(new UpdateEmployeesSuccessEvent(employees)));
             } catch (ConnectionFailedException e) {
-                onMainThread(() -> postStickyEvent(new UpdateEmployeesFailureEvent(Error.CONNECTION_FAILED)));
-
-                if (repository.hasCachedEmployees()) {
-                    List<Employee> employees = repository.getEmployees(DataSourceType.CACHE);
-                    onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
-                    return;
-                }
-
-                List<Employee> employees = repository.getEmployees(DataSourceType.LOCAL);
-                onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
+                processConnectionFailed();
             }
         });
     }
@@ -79,5 +70,18 @@ public class UpdateEmployeesInteractor extends BaseInteractor<Void> {
             List<Employee> employees = repository.getEmployees(DataSourceType.LOCAL);
             onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
         });
+    }
+
+    private void processConnectionFailed() {
+        onMainThread(() -> postStickyEvent(new UpdateEmployeesFailureEvent(Error.CONNECTION_FAILED)));
+
+        if (repository.hasCachedEmployees()) {
+            List<Employee> employees = repository.getEmployees(DataSourceType.CACHE);
+            onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
+            return;
+        }
+
+        List<Employee> employees = repository.getEmployees(DataSourceType.LOCAL);
+        onMainThread(() -> postStickyEvent(new GetEmployeesSuccessEvent(employees)));
     }
 }
