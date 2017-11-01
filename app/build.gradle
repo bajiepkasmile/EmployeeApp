@@ -7,6 +7,14 @@ ext {
 }
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'employee_app_key'
+            keyPassword '654321'
+            storeFile file('/Users/Valeriy/Desktop/EmployeeApp/keystore.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.nodomain.employeeapp"
@@ -21,15 +29,19 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$support_library_version"
     implementation "com.android.support:design:$support_library_version"
     implementation "com.android.support:cardview-v7:$support_library_version"

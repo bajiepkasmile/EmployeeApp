@@ -44,6 +44,14 @@ public class Employee implements Parcelable, Copyable<Employee> {
         this.speciality = speciality;
     }
 
+    public Employee(String firstName,
+                    String lastName,
+                    long birthdayTime,
+                    String avatarUrl,
+                    long specialityId,
+                    String speciality) {
+        this(firstName, lastName, birthdayTimeToBirthdayDate(birthdayTime), avatarUrl, specialityId, speciality);
+    }
 
     protected Employee(Parcel in) {
         firstName = in.readString();
@@ -52,6 +60,13 @@ public class Employee implements Parcelable, Copyable<Employee> {
         avatarUrl = in.readString();
         specialityId = in.readLong();
         speciality = in.readString();
+    }
+
+    private static Date birthdayTimeToBirthdayDate(long birthdayTime) {
+        if (birthdayTime == -1)
+            return null;
+        else
+            return new Date(birthdayTime);
     }
 
     @Override
@@ -104,24 +119,17 @@ public class Employee implements Parcelable, Copyable<Employee> {
         return speciality;
     }
 
-    private Date getBirthdayDateCopy() {
-        if (birthdayDate != null)
-            return new Date(birthdayDate.getTime());
-        else
-            return null;
-    }
-
-    private long getBirthdayTime() {
+    public long getBirthdayTime() {
         if (birthdayDate != null)
             return birthdayDate.getTime();
         else
             return  -1;
     }
 
-    private Date birthdayTimeToBirthdayDate(long birthdayTime) {
-        if (birthdayTime == -1)
-            return null;
+    private Date getBirthdayDateCopy() {
+        if (birthdayDate != null)
+            return new Date(birthdayDate.getTime());
         else
-            return new Date(birthdayTime);
+            return null;
     }
 }
